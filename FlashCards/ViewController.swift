@@ -18,6 +18,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var btnOptionTwo: UIButton!
     @IBOutlet weak var btnOptionThree: UIButton!
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let navigationController = segue.destination as! UINavigationController
+        
+        let creationController = navigationController.topViewController as! CreationViewController
+        
+        creationController.flashcardsController = self
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -57,6 +67,14 @@ class ViewController: UIViewController {
         else{
             frontLabel.isHidden = true;
         }
+    }
+    
+    func updateFlashCard(question: String, answer: String){
+        frontLabel.text = question
+        backLabel.text = answer
+        btnOptionOne.isHidden = true
+        btnOptionTwo.isHidden = true
+        btnOptionThree.isHidden = true
     }
     
     @IBAction func didTapOptionOne(_ sender: Any) {
